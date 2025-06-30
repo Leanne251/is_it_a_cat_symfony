@@ -19,7 +19,7 @@ RUN mkdir -p /var/www/
 WORKDIR /var/www
 
 # Copy Symfony project files into container
-COPY . /var/www/html
+COPY . /var/www
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
