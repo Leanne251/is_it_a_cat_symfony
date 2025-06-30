@@ -12,6 +12,9 @@ RUN apt-get update && apt-get install -y \
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
+# Ensure var directory exists (not in Git)
+RUN mkdir -p /var/www/html/var
+
 # Set working directory
 WORKDIR /var/www/html
 
