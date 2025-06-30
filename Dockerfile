@@ -13,22 +13,25 @@ RUN apt-get update && apt-get install -y \
 RUN a2enmod rewrite
 
 # Ensure var directory exists (not in Git)
-RUN mkdir -p /var/www/html/var
+RUN mkdir -p /var/www/
 
 # Set working directory
-WORKDIR /var/www/html
+WORKDIR /var/www
 
 # Copy Symfony project files into container
-COPY . /var/www/html
+COPY . /var/www
 
 # Install Composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Install Symfony dependencies
-RUN composer install --no-interaction --no-scripts --prefer-dist
+# RUN composer install --no-interaction --no-scripts --prefer-dist
 
-# Set correct permissions
-RUN chown -R www-data:www-data /var/www/html/var /var/www/html/vendor
+RUN composer install --no-scripts --no-autoloader
 
-# Expose port 80
 EXPOSE 80
+
+RUN sed -i 's!/var/www/html!/var/www/html/public!g' \
+  /etc/apache2/sites-available/000-default.conf
+
+CMD ["apache2-foreground"]
