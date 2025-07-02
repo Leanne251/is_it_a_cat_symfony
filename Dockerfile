@@ -38,7 +38,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN COMPOSER_ALLOW_SUPERUSER=1 composer install --no-scripts --no-autoloader
 
 # Fix permissions (especially for cache/logs)
-RUN chown -R www-data:www-data /var/www/var /var/www/vendor
+# RUN chown -R www-data:www-data /var/www/var /var/www/vendor
 
 # Expose Apache HTTP port
 EXPOSE 80
