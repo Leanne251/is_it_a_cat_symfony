@@ -35,7 +35,7 @@ RUN sed -i "s#DocumentRoot /var/www/html#DocumentRoot /var/www/public#g" \
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Install Symfony dependencies (in /var/www)
-RUN composer install --no-interaction --prefer-dist
+RUN COMPOSER_ALLOW_SUPERUSER=1 composer install --no-scripts --no-autoloader
 
 # Fix permissions (especially for cache/logs)
 RUN chown -R www-data:www-data /var/www/var /var/www/vendor
