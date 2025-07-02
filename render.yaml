@@ -1,0 +1,11 @@
+services:
+  - name: symfony-web
+    type: web
+    env: docker
+    plan: free
+    branch: main
+    buildCommand: ""
+    startCommand: "php -S 0.0.0.0:8000 -t public"
+    envVars:
+      - key: FLASK_API_URL
+        value: https://is-it-a-cat-flask-j7py.onrender.com

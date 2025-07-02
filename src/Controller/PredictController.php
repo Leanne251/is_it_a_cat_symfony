@@ -28,8 +28,22 @@ class PredictController extends AbstractController
             if ($image) {
                 $filePath = $image->getPathname();
 
+                $flaskUrl = $_ENV['FLASK_API_URL'] ?? 'http://127.0.0.1:5000';
+
+            
+                
+
                 // Send to Python API
-                $response = $this->httpClient->request('POST', 'http://127.0.0.1:5000/predict', [
+                // 
+                // $response = $this->httpClient->request('POST', 'http://host.docker.internal:5000/predict', [
+
+                
+
+                // TAKE OUT ENV VARIABLES AND SEE IF WILL WORK. 
+                //ALSO CHANGE ENV BACK TO PORT 5000
+
+                $response = $this->httpClient->request('POST', $flaskUrl . '/predict', [
+                // $response = $this->httpClient->request('POST', 'http://127.0.0.1:5050/predict', [
                     'headers' => [
                          'Accept' => 'application/json'
                         ],
@@ -37,6 +51,7 @@ class PredictController extends AbstractController
                         'image' => fopen($filePath, 'r')
                         ]
                 ]);
+
 
                 print_r($response->getContent());
 
