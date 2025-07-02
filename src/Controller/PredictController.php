@@ -13,10 +13,12 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class PredictController extends AbstractController
 {
     private $httpClient;
+    private $flaskApiUrl;
 
-    public function __construct(HttpClientInterface $httpClient)
+    public function __construct(HttpClientInterface $httpClient, string $flaskApiUrl)
     {
         $this->httpClient = $httpClient;
+        $this->flaskApiUrl = $flaskApiUrl;
     }
 
     #[Route('/predict', name: 'app_predict', methods: ['GET', 'POST'])]
@@ -28,7 +30,7 @@ class PredictController extends AbstractController
             if ($image) {
                 $filePath = $image->getPathname();
 
-                $flaskUrl = $_ENV['FLASK_API_URL'] ?? 'http://127.0.0.1:5000';
+                $flaskUrl = $this->flaskApiUrl ?? 'http://127.0.0.1:5000';
 
             
                 
