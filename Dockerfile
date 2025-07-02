@@ -34,7 +34,7 @@ RUN sed -i "s#DocumentRoot /var/www/html#DocumentRoot /var/www/public#g" \
 # Install Composer (from official Composer image)
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# ENV APP_ENV=prod
+ENV APP_ENV=prod
 ENV FLASK_API_URL=https://is-it-a-cat-flask-j7py.onrender.com
 
 # Install Symfony dependencies (in /var/www)
