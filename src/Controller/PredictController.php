@@ -28,7 +28,7 @@ class PredictController extends AbstractController
             if ($image) {
                 $filePath = $image->getPathname();
 
-                $flaskUrl = $_ENV['FLASK_API_URL'] ?? 'http://127.0.0.1:5000';
+                $flaskUrl = $_SERVER['FLASK_API_URL'] ?? 'http://127.0.0.1:5000';
 
             
                 
