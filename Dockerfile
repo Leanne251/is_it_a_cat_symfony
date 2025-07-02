@@ -35,10 +35,10 @@ RUN sed -i "s#DocumentRoot /var/www/html#DocumentRoot /var/www/public#g" \
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Install Symfony dependencies (in /var/www)
-RUN COMPOSER_ALLOW_SUPERUSER=1 composer install --no-scripts --no-autoloader
+RUN COMPOSER_ALLOW_SUPERUSER=1 composer install --optimize-autoloader --no-dev --classmap-authoritative
 
 # Fix permissions (especially for cache/logs)
-# RUN chown -R www-data:www-data /var/www/var /var/www/vendor
+RUN chown -R www-data:www-data /var/www/var /var/www/vendor
 
 # Expose Apache HTTP port
 EXPOSE 80
