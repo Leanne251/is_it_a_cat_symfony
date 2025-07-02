@@ -13,12 +13,12 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class PredictController extends AbstractController
 {
     private $httpClient;
-    private $flaskApiUrl;
+    // private $flaskApiUrl;
 
-    public function __construct(HttpClientInterface $httpClient, string $flaskApiUrl)
+    public function __construct(HttpClientInterface $httpClient)
     {
         $this->httpClient = $httpClient;
-        $this->flaskApiUrl = $flaskApiUrl;
+        // $this->flaskApiUrl = $flaskApiUrl;
     }
 
     #[Route('/predict', name: 'app_predict', methods: ['GET', 'POST'])]

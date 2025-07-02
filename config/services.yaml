@@ -3,8 +3,8 @@
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
-parameters:
-  flask_api_url: '%env(FLASK_API_URL)%'
+# parameters:
+#   flask_api_url: '%env(FLASK_API_URL)%'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -20,12 +20,12 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    services:
+    # services:
     # ...
 
-    App\Controller\PredictController:
-        arguments:
-            $flaskApiUrl: '%flask_api_url%'
+    # App\Controller\PredictController:
+    #     arguments:
+    #         $flaskApiUrl: '%flask_api_url%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
