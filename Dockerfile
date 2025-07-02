@@ -27,9 +27,6 @@ ENV FLASK_API_URL=http://host.docker.internal:5050
 # Default port
 ENV PORT=5050
 
-# Fix permissions (especially for cache/logs)
-RUN chown -R www-data:www-data /var/www/var /var/www/vendor
-
 # Set Apache DocumentRoot to Symfony's /public directory
 RUN sed -i "s#DocumentRoot /var/www/html#DocumentRoot /var/www/public#g" \
     /etc/apache2/sites-available/000-default.conf
@@ -39,6 +36,9 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Install Symfony dependencies (in /var/www)
 RUN composer install --no-interaction --prefer-dist
+
+# Fix permissions (especially for cache/logs)
+RUN chown -R www-data:www-data /var/www/var /var/www/vendor
 
 # Expose Apache HTTP port
 EXPOSE 80
