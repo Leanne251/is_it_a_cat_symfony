@@ -47,8 +47,8 @@ RUN chown -R www-data:www-data /var/www/var /var/www/vendor
 EXPOSE 80
 
 # Start Apache in foreground
-CMD ["apache2-foreground"]
-# CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
+# CMD ["apache2-foreground"]
+CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
 
 # docker build -t symfony-app .
 # docker run -it --rm -p 8000:8000 symfony-app

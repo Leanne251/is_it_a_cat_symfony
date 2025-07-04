@@ -1,11 +1,23 @@
+version: '3.9'
+
 services:
+  flask:
+    build:
+      context: ./flask
+    ports:
+      - "5050:7860"  # host:container
+    working_dir: /app
+    command: python app.py
+
+
   symfony:
-    build: .
+    build:
+      context: ./symfony
     ports:
       - "8000:8000"
     environment:
-      - FLASK_API_URL=http://host.docker.internal:5050
-    volumes:
-      - .:/var/www
+      - FLASK_API_URL=http://flask:7860
     working_dir: /var/www
+    volumes:
+      - ./symfony:/var/www
     command: php -S 0.0.0.0:8000 -t public
